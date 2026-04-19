@@ -1,0 +1,11 @@
+/home/blank727/Projects/Reactivities/Domain/bin/Debug/net10.0/Domain.deps.json
+/home/blank727/Projects/Reactivities/Domain/bin/Debug/net10.0/Domain.dll
+/home/blank727/Projects/Reactivities/Domain/bin/Debug/net10.0/Domain.pdb
+/home/blank727/Projects/Reactivities/Domain/obj/Debug/net10.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/blank727/Projects/Reactivities/Domain/obj/Debug/net10.0/Domain.AssemblyInfoInputs.cache
+/home/blank727/Projects/Reactivities/Domain/obj/Debug/net10.0/Domain.AssemblyInfo.cs
+/home/blank727/Projects/Reactivities/Domain/obj/Debug/net10.0/Domain.csproj.CoreCompileInputs.cache
+/home/blank727/Projects/Reactivities/Domain/obj/Debug/net10.0/Domain.dll
+/home/blank727/Projects/Reactivities/Domain/obj/Debug/net10.0/refint/Domain.dll
+/home/blank727/Projects/Reactivities/Domain/obj/Debug/net10.0/Domain.pdb
+/home/blank727/Projects/Reactivities/Domain/obj/Debug/net10.0/ref/Domain.dll
