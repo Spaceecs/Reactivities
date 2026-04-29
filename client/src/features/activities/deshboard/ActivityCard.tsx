@@ -7,15 +7,15 @@ import {
   Chip,
   Typography,
 } from "@mui/material";
-import type { Activity } from "../../../lib/types";
 import { useActivities } from "../../../lib/hooks/useActivities";
+import type { Activity } from "../../../lib/types";
+import { Link } from "react-router";
 
 type Props = {
   activity: Activity;
-  selectActivity: (id: string) => void;
 };
 
-export default function ActivityCard({ activity, selectActivity }: Props) {
+export default function ActivityCard({ activity }: Props) {
   const { deleteActivity } = useActivities();
   return (
     <Card sx={{ borderRadius: 3 }}>
@@ -35,9 +35,10 @@ export default function ActivityCard({ activity, selectActivity }: Props) {
         <Chip label={activity.category} variant="outlined" />
         <Box display="flex" gap={3}>
           <Button
+            component={Link}
+            to={`/activities/${activity.id}`}
             size="medium"
             variant="contained"
-            onClick={() => selectActivity(activity.id)}
           >
             View
           </Button>
