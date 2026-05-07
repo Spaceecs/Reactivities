@@ -1,14 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { Activity } from "../types";
-import agent from "../agent";
 import { useLocation } from "react-router";
+import agent from "../agent";
+import type { Activity } from "../types";
 
 export const useActivities = (id?: string) => {
   const queryClient = useQueryClient();
-
   const location = useLocation();
 
-  const { data: activities, isPending } = useQuery({
+  const { isPending, data: activities } = useQuery({
     queryKey: ["activities"],
     queryFn: async () => {
       const response = await agent.get<Activity[]>("/activities");
@@ -17,7 +16,7 @@ export const useActivities = (id?: string) => {
     enabled: !id && location.pathname === "/activities",
   });
 
-  const { data: activity, isLoading: isLoadingActivity } = useQuery({
+  const { isLoading: isLoadingActivity, data: activity } = useQuery<Activity>({
     queryKey: ["activities", id],
     queryFn: async () => {
       const response = await agent.get<Activity>(`/activities/${id}`);
@@ -31,7 +30,9 @@ export const useActivities = (id?: string) => {
       await agent.put("/activities", activity);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["activities"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["activities"],
+      });
     },
   });
 
@@ -41,7 +42,9 @@ export const useActivities = (id?: string) => {
       return response.data;
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["activities"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["activities"],
+      });
     },
   });
 
@@ -50,7 +53,9 @@ export const useActivities = (id?: string) => {
       await agent.delete(`/activities/${id}`);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["activities"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["activities"],
+      });
     },
   });
 
