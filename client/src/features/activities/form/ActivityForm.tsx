@@ -14,7 +14,6 @@ import { categoryOptions } from "./categoryOptions";
 import DateTimeInput from "../../../app/shared/components/DateTimeInput";
 import LocationInput from "../../../app/shared/components/LocationInput";
 import type z from "zod";
-import type { Activity } from "../../../lib/types";
 
 export default function ActivityForm() {
   type ActivityInput = z.input<typeof activitySchema>;
