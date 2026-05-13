@@ -1,3 +1,4 @@
+using System;
 using Application.Activities.DTOs;
 using Application.Core;
 using AutoMapper;
@@ -18,7 +19,7 @@ public class EditActivity
     {
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var activity = await context.Activities.FindAsync([request.ActivityDto.Id], cancellationToken);
+            var activity = await context.Activities.FindAsync([request.ActivityDto.Id, cancellationToken], cancellationToken: cancellationToken);
 
             if (activity == null) return Result<Unit>.Failure("Activity not found", 404);
 
@@ -26,7 +27,7 @@ public class EditActivity
 
             var result = await context.SaveChangesAsync(cancellationToken) > 0;
 
-            if (!result) return Result<Unit>.Failure("Failed to update the activity", 400);
+            if (!result) return Result<Unit>.Failure("Failed to delete the activity", 400);
 
             return Result<Unit>.Success(Unit.Value);
         }
