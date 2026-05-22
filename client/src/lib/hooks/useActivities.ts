@@ -17,16 +17,18 @@ export const useActivities = (id?: string) => {
     enabled: !id && location.pathname === "/activities" && !!currentUser,
     select: (data) => {
       return data.map((activity) => {
+        const host = activity.attendees.find((x) => x.id === activity.hostId);
         return {
           ...activity,
           isHost: currentUser?.id === activity.hostId,
           isGoing: activity.attendees.some((x) => x.id === currentUser?.id),
+          hostImageUrl: host?.imageUrl,
         };
       });
     },
   });
 
-  const { isLoading: isLoadingActivity, data: activity } = useQuery<Activity>({
+  const { isLoading: isLoadingActivity, data: activity } = useQuery({
     queryKey: ["activities", id],
     queryFn: async () => {
       const response = await agent.get<Activity>(`/activities/${id}`);
@@ -34,10 +36,12 @@ export const useActivities = (id?: string) => {
     },
     enabled: !!id && !!currentUser,
     select: (data) => {
+      const host = data.attendees.find((x) => x.id === data.hostId);
       return {
         ...data,
         isHost: currentUser?.id === data.hostId,
         isGoing: data.attendees.some((x) => x.id === currentUser?.id),
+        hostImageUrl: host?.imageUrl,
       };
     },
   });

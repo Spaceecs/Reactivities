@@ -45,7 +45,7 @@ agent.interceptors.response.use(
         }
         break;
       case 401:
-        toast.error("Unauthorised");
+        toast.error("Unauthorized");
         break;
       case 404:
         router.navigate("/not-found");
