@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AllowMissingPrunePackageData>true</AllowMissingPrunePackageData>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,5 +17,4 @@
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.29.1" />
   </ItemGroup>
-
 </Project>

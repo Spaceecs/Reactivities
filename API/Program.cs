@@ -1,18 +1,18 @@
+using API.Middleware;
+using API.SignalR;
 using Application.Activities.Queries;
 using Application.Activities.Validators;
 using Application.Core;
+using Application.Interfaces;
+using Domain;
+using FluentValidation;
+using Infrastructure.Photos;
+using Infrastructure.Security;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using FluentValidation;
-using API.Middleware;
-using Domain;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Application.Interfaces;
-using Infrastructure.Security;
-using Infrastructure.Photos;
-using API.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,30 +46,39 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
 
 builder.Services.AddTransient<ExceptionMiddleware>();
 
-builder.Services.AddIdentityApiEndpoints<User>(opt =>
-{
-    opt.User.RequireUniqueEmail = true;
-})
-.AddRoles<IdentityRole>()
-.AddEntityFrameworkStores<AppDbContext>();
+builder
+    .Services.AddIdentityApiEndpoints<User>(opt =>
+    {
+        opt.User.RequireUniqueEmail = true;
+    })
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddAuthorization(opt =>
 {
-    opt.AddPolicy("IsActivityHost", policy =>
-    {
-        policy.Requirements.Add(new IsHostRequirement());
-    });
+    opt.AddPolicy(
+        "IsActivityHost",
+        policy =>
+        {
+            policy.Requirements.Add(new IsHostRequirement());
+        }
+    );
 });
 builder.Services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
-builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+builder.Services.Configure<CloudinarySettings>(
+    builder.Configuration.GetSection("CloudinarySettings")
+);
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
-    .AllowCredentials()
-    .WithOrigins("http://localhost:3000", "https://localhost:3000"));
+app.UseCors(x =>
+    x.AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials()
+        .WithOrigins("http://localhost:3000", "https://localhost:3000")
+);
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -91,7 +100,7 @@ try
 catch (Exception ex)
 {
     var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex, "An error accrued during migration");
+    logger.LogError(ex, "An error occurred during migration");
 }
 
 app.Run();

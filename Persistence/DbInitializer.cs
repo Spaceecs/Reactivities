@@ -10,11 +10,29 @@ public class DbInitializer
     public static async Task SeedData(AppDbContext context, UserManager<User> userManager)
     {
         var users = new List<User>
+        {
+            new()
             {
-                new() {DisplayName = "Bob", UserName = "bob@test.com", Email="bob@test.com"},
-                new() {DisplayName = "Tom", UserName = "tom@test.com", Email="tom@test.com"},
-                new() {DisplayName = "Jane", UserName = "jane@test.com", Email="jane@test.com"},
-            };
+                Id = "bob-id",
+                DisplayName = "Bob",
+                UserName = "bob@test.com",
+                Email = "bob@test.com",
+            },
+            new()
+            {
+                Id = "tom-id",
+                DisplayName = "Tom",
+                UserName = "tom@test.com",
+                Email = "tom@test.com",
+            },
+            new()
+            {
+                Id = "jane-id",
+                DisplayName = "Jane",
+                UserName = "jane@test.com",
+                Email = "jane@test.com",
+            },
+        };
         if (!userManager.Users.Any())
         {
             foreach (var user in users)
@@ -23,7 +41,8 @@ public class DbInitializer
             }
         }
 
-        if (await context.Activities.AnyAsync()) return;
+        if (await context.Activities.AnyAsync())
+            return;
 
         var activities = new List<Activity>
         {
@@ -40,17 +59,9 @@ public class DbInitializer
                 Longitude = -0.1256611057818921,
                 Attendees =
                 [
-                    new()
-                    {
-                        UserId = users[0].Id,
-                        IsHost = true,
-                    },
-                    new()
-                    {
-                        UserId = users[1].Id,
-                        IsHost = false,
-                    }
-                ]
+                    new() { UserId = users[0].Id, IsHost = true },
+                    new() { UserId = users[1].Id, IsHost = false },
+                ],
             },
             new()
             {
@@ -65,20 +76,10 @@ public class DbInitializer
                 Longitude = 2.33802768704666,
                 Attendees =
                 [
-                    new()
-                    {
-                        UserId = users[1].Id,
-                        IsHost = true,
-                    },
-                    new()
-                    {
-                        UserId = users[2].Id
-                    },
-                    new()
-                    {
-                        UserId = users[0].Id,
-                    }
-                ]
+                    new() { UserId = users[1].Id, IsHost = true },
+                    new() { UserId = users[2].Id },
+                    new() { UserId = users[0].Id },
+                ],
             },
             new()
             {
@@ -90,14 +91,7 @@ public class DbInitializer
                 Venue = "Natural History Museum",
                 Latitude = 51.496510900000004,
                 Longitude = -0.17600190725447445,
-                Attendees =
-                [
-                    new()
-                    {
-                        UserId = users[2].Id,
-                        IsHost = true,
-                    }
-                ]
+                Attendees = [new() { UserId = users[2].Id, IsHost = true }],
             },
             new()
             {
@@ -111,16 +105,9 @@ public class DbInitializer
                 Longitude = 0.0032029278126681844,
                 Attendees =
                 [
-                    new()
-                    {
-                        UserId = users[0].Id,
-                        IsHost = true,
-                    },
-                    new()
-                    {
-                        UserId = users[2].Id
-                    }
-                ]
+                    new() { UserId = users[0].Id, IsHost = true },
+                    new() { UserId = users[2].Id },
+                ],
             },
             new()
             {
@@ -132,14 +119,7 @@ public class DbInitializer
                 Venue = "The Mayflower",
                 Latitude = 51.501778,
                 Longitude = -0.053577,
-                Attendees =
-                [
-                    new()
-                    {
-                        UserId = users[1].Id,
-                        IsHost = true,
-                    }
-                ]
+                Attendees = [new() { UserId = users[1].Id, IsHost = true }],
             },
             new()
             {
@@ -153,16 +133,9 @@ public class DbInitializer
                 Longitude = -0.10364680647106028,
                 Attendees =
                 [
-                    new()
-                    {
-                        UserId = users[2].Id,
-                        IsHost = true,
-                    },
-                    new()
-                    {
-                        UserId = users[0].Id
-                    }
-                ]
+                    new() { UserId = users[2].Id, IsHost = true },
+                    new() { UserId = users[0].Id },
+                ],
             },
             new()
             {
@@ -175,14 +148,7 @@ public class DbInitializer
                     "Sherlock Holmes Museum, 221b, Baker Street, Marylebone, London, Greater London, England, NW1 6XE, United Kingdom",
                 Latitude = 51.5237629,
                 Longitude = -0.1584743,
-                Attendees =
-                [
-                    new()
-                    {
-                        UserId = users[0].Id,
-                        IsHost = true,
-                    }
-                ]
+                Attendees = [new() { UserId = users[0].Id, IsHost = true }],
             },
             new()
             {
@@ -197,16 +163,9 @@ public class DbInitializer
                 Longitude = -0.15197608174931165,
                 Attendees =
                 [
-                    new()
-                    {
-                        UserId = users[1].Id,
-                        IsHost = true,
-                    },
-                    new()
-                    {
-                        UserId = users[0].Id
-                    }
-                ]
+                    new() { UserId = users[1].Id, IsHost = true },
+                    new() { UserId = users[0].Id },
+                ],
             },
             new()
             {
@@ -220,16 +179,9 @@ public class DbInitializer
                 Longitude = -0.781404,
                 Attendees =
                 [
-                    new()
-                    {
-                        UserId = users[2].Id,
-                        IsHost = true,
-                    },
-                    new()
-                    {
-                        UserId = users[1].Id
-                    }
-                ]
+                    new() { UserId = users[2].Id, IsHost = true },
+                    new() { UserId = users[1].Id },
+                ],
             },
             new()
             {
@@ -241,15 +193,8 @@ public class DbInitializer
                 Venue = "Odeon Leicester Square",
                 Latitude = 51.5575525,
                 Longitude = -0.781404,
-                Attendees =
-                [
-                    new()
-                    {
-                        UserId = users[0].Id,
-                        IsHost = true,
-                    }
-                ]
-            }
+                Attendees = [new() { UserId = users[0].Id, IsHost = true }],
+            },
         };
         context.Activities.AddRange(activities);
         await context.SaveChangesAsync();
