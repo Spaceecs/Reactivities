@@ -3,6 +3,7 @@ import { useState, type SyntheticEvent } from "react";
 import ProfilePhotos from "./ProfilePhotos";
 import ProfileAbout from "./ProfileAbout";
 import ProfileFollowings from "./ProfileFollowings";
+import ProfileActivities from "./ProfileActivities";
 
 export default function ProfileContent() {
   const [value, setValue] = useState(0);
@@ -22,7 +23,7 @@ export default function ProfileContent() {
     },
     {
       label: "Events",
-      content: <div>Events</div>,
+      content: <ProfileActivities />,
     },
     {
       label: "Followers",
