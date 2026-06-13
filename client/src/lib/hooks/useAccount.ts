@@ -1,8 +1,8 @@
-import { type RegisterSchema } from "../schemas/registerSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { LoginSchema } from "../schemas/loginSchema";
-import agent from "../agent";
+import agent from "../api/agent.ts";
+import type { LoginSchema } from "../schemas/loginSchema.ts";
 import { useNavigate } from "react-router";
+import type { RegisterSchema } from "../schemas/registerSchema.ts";
 import { toast } from "react-toastify";
 
 export const useAccount = () => {
@@ -17,16 +17,13 @@ export const useAccount = () => {
       await queryClient.invalidateQueries({
         queryKey: ["user"],
       });
+      await navigate("/activities");
     },
   });
 
   const registerUser = useMutation({
     mutationFn: async (creds: RegisterSchema) => {
       await agent.post("/account/register", creds);
-    },
-    onSuccess: () => {
-      toast.success("Register successful - you can now login");
-      navigate("/login");
     },
   });
 
@@ -38,6 +35,29 @@ export const useAccount = () => {
       queryClient.removeQueries({ queryKey: ["user"] });
       queryClient.removeQueries({ queryKey: ["activities"] });
       navigate("/");
+    },
+  });
+
+  const verifyEmail = useMutation({
+    mutationFn: async ({ userId, code }: { userId: string; code: string }) => {
+      await agent.get(`/confirmEmail?userId=${userId}&code=${code}`);
+    },
+  });
+
+  const resendConfirmationEmail = useMutation({
+    mutationFn: async ({
+      email,
+      userId,
+    }: {
+      email?: string;
+      userId?: string | null;
+    }) => {
+      await agent.get(`/account/resendConfirmEmail`, {
+        params: { email, userId },
+      });
+    },
+    onSuccess: () => {
+      toast.success("Email sent - please check your inbox");
     },
   });
 
@@ -56,5 +76,7 @@ export const useAccount = () => {
     logoutUser,
     loadingUserInfo,
     registerUser,
+    resendConfirmationEmail,
+    verifyEmail,
   };
 };

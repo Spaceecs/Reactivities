@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useLocation } from "react-router";
-import agent from "../agent";
+import agent from "../api/agent";
 import { useAccount } from "./useAccount";
 import { useStore } from "./useStore";
 

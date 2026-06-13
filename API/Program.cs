@@ -6,6 +6,7 @@ using Application.Core;
 using Application.Interfaces;
 using Domain;
 using FluentValidation;
+using Infrastructure.Email;
 using Infrastructure.Photos;
 using Infrastructure.Security;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Resend;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers(opt =>
 {
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
@@ -27,29 +28,37 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
 builder.Services.AddCors();
 builder.Services.AddSignalR();
-builder.Services.AddMediatR(x =>
+builder.Services.AddMediatR(cfg =>
 {
-    x.RegisterServicesFromAssemblyContaining<Application.Core.MappingProfiles>();
-    x.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    cfg.RegisterServicesFromAssemblyContaining<GetActivityList>();
+    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    cfg.LicenseKey = builder.Configuration["Licences:MediatR"];
 });
-
+builder.Services.AddHttpClient<ResendClient>();
+builder.Services.Configure<ResendClientOptions>(opt =>
+{
+    opt.ApiToken = builder.Configuration["Resend:ApiToken"]!;
+});
+builder.Services.AddTransient<IResend, ResendClient>();
+builder.Services.AddTransient<IEmailSender<User>, EmailSender>();
 builder.Services.AddScoped<IUserAccessor, UserAccessor>();
-
 builder.Services.AddScoped<IPhotoService, PhotoService>();
-
-builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
-
+builder.Services.AddAutoMapper(
+    cfg =>
+    {
+        cfg.LicenseKey = builder.Configuration["Licences:MediatR"];
+    },
+    typeof(MappingProfiles)
+);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
-
 builder.Services.AddTransient<ExceptionMiddleware>();
-
 builder
     .Services.AddIdentityApiEndpoints<User>(opt =>
     {
         opt.User.RequireUniqueEmail = true;
+        opt.SignIn.RequireConfirmedEmail = true;
     })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
@@ -70,9 +79,8 @@ builder.Services.Configure<CloudinarySettings>(
 
 var app = builder.Build();
 
-app.UseMiddleware<ExceptionMiddleware>();
-
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(x =>
     x.AllowAnyHeader()
         .AllowAnyMethod()
