@@ -1,6 +1,6 @@
 import { type EditProfileSchema } from "./../schemas/editProfileSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import agent from "../agent";
+import agent from "../api/agent";
 import { useMemo, useState } from "react";
 
 export const useProfile = (id?: string, predicate?: string) => {
