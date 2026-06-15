@@ -59,12 +59,14 @@ export default function UserMenu() {
           </ListItemIcon>
           <ListItemText>My profile</ListItemText>
         </MenuItem>
-        <MenuItem component={Link} to="/change-password" onClick={handleClose}>
-          <ListItemIcon>
-            <Password />
-          </ListItemIcon>
-          <ListItemText>Change Password</ListItemText>
-        </MenuItem>
+        {currentUser?.loginProvider !== "GitHub" && (
+          <MenuItem component={Link} to="/change-password" onClick={handleClose}>
+            <ListItemIcon>
+              <Password />
+            </ListItemIcon>
+            <ListItemText>Change Password</ListItemText>
+          </MenuItem>
+        )}
         <MenuItem
           onClick={() => {
             logoutUser.mutate();
