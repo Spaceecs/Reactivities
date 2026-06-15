@@ -11,6 +11,7 @@ import TextInput from "../../app/shared/components/TextInput.tsx";
 import { useNavigate, useLocation, Link } from "react-router";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { GitHub } from "@mui/icons-material";
 
 export default function LoginForm() {
   const [notVerified, setNotVerified] = useState(false);
@@ -49,6 +50,12 @@ export default function LoginForm() {
         }
       },
     });
+  };
+
+  const loginWithGitHub = () => {
+    const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
+    const redirectUrl = import.meta.env.VITE_REDIRECT_URL;
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirectUri=${redirectUrl}&scope=read:user user:email`;
   };
 
   return (
@@ -90,6 +97,16 @@ export default function LoginForm() {
         size="large"
       >
         Login
+      </Button>
+      <Button
+        onClick={loginWithGitHub}
+        startIcon={<GitHub />}
+        sx={{ backgroundColor: "black" }}
+        type="button"
+        variant="contained"
+        size="large"
+      >
+        Login with GitHub
       </Button>
       {notVerified ? (
         <Box display="flex" flexDirection="column" justifyContent="center">

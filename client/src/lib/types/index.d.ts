@@ -48,6 +48,7 @@ type User = {
   email: string;
   displayName: string;
   imageUrl?: string;
+  loginProvider?: string;
 };
 
 type ChatComment = {
