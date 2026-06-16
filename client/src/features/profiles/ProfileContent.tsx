@@ -38,11 +38,15 @@ export default function ProfileContent() {
   return (
     <Box
       component={Paper}
-      mt={2}
-      p={3}
-      elevation={3}
-      height={500}
-      sx={{ display: "flex", alignItems: "flex-start", borderRadius: 3 }}
+      sx={{
+        display: "flex",
+        alignItems: "flex-start",
+        borderRadius: 3,
+        mt: 2,
+        p: 3,
+        elevation: 3,
+        height: 500,
+      }}
     >
       <Tabs
         orientation="vertical"

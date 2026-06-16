@@ -27,8 +27,7 @@ const ActivityList = observer(function ActivityList() {
         <Box
           key={activity.id}
           ref={index === allActivities.length - 1 ? ref : null}
-          display="flex"
-          flexDirection="column"
+          sx={{ display: "flex", flexDirection: "column" }}
         >
           <ActivityCard activity={activity} />
         </Box>

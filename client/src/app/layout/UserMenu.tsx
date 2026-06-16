@@ -1,12 +1,18 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
-import { Avatar, Box, ListItemIcon, ListItemText } from "@mui/material";
-import { useAccount } from "../../lib/hooks/useAccount";
 import { Link } from "react-router";
 import { Add, Logout, Password, Person } from "@mui/icons-material";
+import {
+  Button,
+  Menu,
+  MenuItem,
+  Avatar,
+  Box,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+
+import { useAccount } from "../../lib/hooks/useAccount";
 
 export default function UserMenu() {
   const { currentUser, logoutUser } = useAccount();
@@ -29,7 +35,7 @@ export default function UserMenu() {
         size="large"
         sx={{ fontSize: "1.1rem" }}
       >
-        <Box display="flex" alignItems="center" gap={2}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <Avatar src={currentUser?.imageUrl} alt="current user image" />
           {currentUser?.displayName}
         </Box>
@@ -39,8 +45,10 @@ export default function UserMenu() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
+        slotProps={{
+          list: {
+            "aria-labelledby": "basic-button",
+          },
         }}
       >
         <MenuItem component={Link} to="/createActivity" onClick={handleClose}>
@@ -60,7 +68,11 @@ export default function UserMenu() {
           <ListItemText>My profile</ListItemText>
         </MenuItem>
         {currentUser?.loginProvider !== "GitHub" && (
-          <MenuItem component={Link} to="/change-password" onClick={handleClose}>
+          <MenuItem
+            component={Link}
+            to="/change-password"
+            onClick={handleClose}
+          >
             <ListItemIcon>
               <Password />
             </ListItemIcon>

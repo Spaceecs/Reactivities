@@ -79,9 +79,7 @@ export default function ActivityForm() {
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        display="flex"
-        flexDirection="column"
-        gap={3}
+        sx={{ display: "flex", flexDirection: "column", gap: 3 }}
       >
         <TextInput label="Title" control={control} name="title" />
         <TextInput
@@ -91,7 +89,7 @@ export default function ActivityForm() {
           multiline
           rows={3}
         />
-        <Box display="flex" gap={3}>
+        <Box sx={{ display: "flex", gap: 3 }}>
           <SelectInput
             items={categoryOptions}
             label="Category"
@@ -105,8 +103,10 @@ export default function ActivityForm() {
           label="Enter the location"
           name="location"
         />
-        <Box display="flex" justifyContent="end" gap={3}>
-          <Button onClick={() => navigate(-1)} color="inherit" >Cancel</Button>
+        <Box sx={{ display: "flex", justifyContent: "end", gap: 3 }}>
+          <Button onClick={() => navigate(-1)} color="inherit">
+            Cancel
+          </Button>
           <Button
             type="submit"
             color="success"

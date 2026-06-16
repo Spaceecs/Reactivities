@@ -42,7 +42,14 @@ export default function AuthCallback() {
         borderRadius: 3,
       }}
     >
-      <Box display="flex" alignItems="center" justifyContent="center" gap={3}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 3,
+        }}
+      >
         <GitHub fontSize="large" />
         <Typography variant="h4">Logging in with GitHub</Typography>
       </Box>

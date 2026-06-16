@@ -29,10 +29,12 @@ export default function VerifyEmail() {
       case "failed":
         return (
           <Box
-            display="flex"
-            flexDirection="column"
-            gap={2}
-            justifyContent="center"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 2,
+            }}
           >
             <Typography>
               Verification failed. You can try resending the verify link to your
@@ -49,10 +51,12 @@ export default function VerifyEmail() {
       case "verified":
         return (
           <Box
-            display="flex"
-            flexDirection="column"
-            gap={2}
-            justifyContent="center"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 2,
+            }}
           >
             <Typography>Email has been verified - you can now login</Typography>
             <Button component={Link} to="/login">

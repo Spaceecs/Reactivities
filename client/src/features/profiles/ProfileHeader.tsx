@@ -4,7 +4,7 @@ import {
   Button,
   Chip,
   Divider,
-  Grid2,
+  Grid,
   Paper,
   Stack,
   Typography,
@@ -20,15 +20,15 @@ export default function ProfileHeader() {
 
   return (
     <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
-      <Grid2 container spacing={2}>
-        <Grid2 size={8}>
-          <Stack direction="row" spacing={3} alignItems="center">
+      <Grid container spacing={2}>
+        <Grid size={8}>
+          <Stack sx={{ direction: "row", spacing: 3, alignItems: "center" }}>
             <Avatar
               src={profile.imageUrl}
               alt={profile.displayName + " image"}
               sx={{ width: 150, height: 150 }}
             />
-            <Box display="flex" flexDirection="column" gap={2}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <Typography variant="h4">{profile.displayName}</Typography>
               {profile.following && (
                 <Chip
@@ -40,15 +40,21 @@ export default function ProfileHeader() {
               )}
             </Box>
           </Stack>
-        </Grid2>
-        <Grid2 size={4}>
-          <Stack spacing={2} alignItems="center">
-            <Box display="flex" justifyContent="space-around" width="100%">
-              <Box textAlign="center">
+        </Grid>
+        <Grid size={4}>
+          <Stack sx={{ spacing: 2, alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-around",
+                width: "100%",
+              }}
+            >
+              <Box sx={{ textAlign: "center" }}>
                 <Typography variant="h6">Followers</Typography>
                 <Typography variant="h3">{profile.followersCount}</Typography>
               </Box>
-              <Box textAlign="center">
+              <Box sx={{ textAlign: "center" }}>
                 <Typography variant="h6">Following</Typography>
                 <Typography variant="h3">{profile.followingsCount}</Typography>
               </Box>
@@ -68,8 +74,8 @@ export default function ProfileHeader() {
               </>
             )}
           </Stack>
-        </Grid2>
-      </Grid2>
+        </Grid>
+      </Grid>
     </Paper>
   );
 }

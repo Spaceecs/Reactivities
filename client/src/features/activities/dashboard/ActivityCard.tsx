@@ -27,7 +27,13 @@ export default function ActivityCard({ activity }: Props) {
       : "default";
   return (
     <Card elevation={3} sx={{ borderRadius: 3 }}>
-      <Box display="flex" alignItems="center" justifyContent="space-between">
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <CardHeader
           avatar={
             <Avatar
@@ -50,7 +56,7 @@ export default function ActivityCard({ activity }: Props) {
             </>
           }
         />
-        <Box display="flex" flexDirection="column" gap={2} mr={2}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mr: 2 }}>
           {(activity.isHost || activity.isGoing) && (
             <Chip
               variant="outlined"
@@ -68,8 +74,8 @@ export default function ActivityCard({ activity }: Props) {
       <Divider sx={{ mb: 3 }} />
 
       <CardContent>
-        <Box display="flex" alignItems="center" gap={2} mb={2}>
-          <Box display="flex" flexGrow={0} alignItems="center">
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
+          <Box sx={{ display: "flex", flexGrow: 0, alignItems: "center" }}>
             <AccessTime sx={{ mr: 1 }} />
             <Typography variant="body2" noWrap>
               {formatDate(activity.date)}
@@ -80,9 +86,13 @@ export default function ActivityCard({ activity }: Props) {
         </Box>
         <Divider />
         <Box
-          display="flex"
-          gap={2}
-          sx={{ backgroundColor: "grey.200", py: 3, pl: 3 }}
+          sx={{
+            backgroundColor: "grey.200",
+            py: 3,
+            pl: 3,
+            display: "flex",
+            gap: 2,
+          }}
         >
           {activity.attendees.map((att) => (
             <AvatarPopover profile={att} key={att.id} />

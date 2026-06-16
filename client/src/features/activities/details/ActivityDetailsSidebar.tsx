@@ -7,7 +7,7 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
-  Grid2,
+  Grid,
 } from "@mui/material";
 import { Link } from "react-router";
 
@@ -33,10 +33,10 @@ export default function ActivityDetailsSidebar({ activity }: Props) {
       </Paper>
       <Paper sx={{ padding: 2 }}>
         {activity.attendees.map((attendee) => (
-          <Grid2 key={attendee.id} container alignItems="center">
-            <Grid2 size={8}>
+          <Grid key={attendee.id} container sx={{ alignItems: "center" }}>
+            <Grid size={8}>
               <List sx={{ display: "flex", flexDirection: "column" }}>
-                <ListItem component={Link} to={`/profiles/${attendee.id}`} >
+                <ListItem component={Link} to={`/profiles/${attendee.id}`}>
                   <ListItemAvatar>
                     <Avatar
                       variant="rounded"
@@ -55,8 +55,8 @@ export default function ActivityDetailsSidebar({ activity }: Props) {
                   </ListItemText>
                 </ListItem>
               </List>
-            </Grid2>
-            <Grid2
+            </Grid>
+            <Grid
               size={4}
               sx={{
                 display: "flex",
@@ -73,8 +73,8 @@ export default function ActivityDetailsSidebar({ activity }: Props) {
                   sx={{ borderRadius: 2 }}
                 />
               )}
-            </Grid2>
-          </Grid2>
+            </Grid>
+          </Grid>
         ))}
       </Paper>
     </>

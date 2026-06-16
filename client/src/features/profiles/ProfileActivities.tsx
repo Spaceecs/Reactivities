@@ -6,7 +6,7 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Grid2,
+  Grid,
   Tab,
   Tabs,
   Typography,
@@ -35,18 +35,18 @@ export default function ProfileActivities() {
 
   return (
     <Box>
-      <Grid2 container spacing={2}>
+      <Grid container spacing={2}>
         <Tabs value={activityTab} onChange={handleTabChange}>
           {tabs.map((tab, index) => (
             <Tab label={tab.menuItem} key={index} />
           ))}
         </Tabs>
-      </Grid2>
+      </Grid>
       {(!userActivities || userActivities.length === 0) &&
       !loadingUserActivities ? (
-        <Typography mt={2}>No activities to show</Typography>
+        <Typography sx={{ mt: 2 }}>No activities to show</Typography>
       ) : null}
-      <Grid2
+      <Grid
         container
         spacing={2}
         sx={{ marginTop: 2, height: 400, overflow: "auto" }}
@@ -54,7 +54,7 @@ export default function ProfileActivities() {
         {userActivities &&
           userActivities.map((activity: Activity) => (
             <Link
-              to={`activities/${activity.id}`}
+              to={`/activities/${activity.id}`}
               style={{ textDecoration: "none" }}
             >
               <Card elevation={4}>
@@ -66,14 +66,16 @@ export default function ProfileActivities() {
                   sx={{ objectFit: "cover" }}
                 />
                 <CardContent>
-                  <Typography variant="h6" textAlign="center" mb={1}>
+                  <Typography variant="h6" sx={{ textAlign: "center", mb: 1 }}>
                     {activity.title}
                   </Typography>
                   <Typography
                     variant="body2"
-                    textAlign="center"
-                    display="flex"
-                    flexDirection="column"
+                    sx={{
+                      textAlign: "center",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
                   >
                     <span>{format(activity.date, "do LLL yyyy")}</span>
                     <span>{format(activity.date, "h:mm a")}</span>
@@ -82,7 +84,7 @@ export default function ProfileActivities() {
               </Card>
             </Link>
           ))}
-      </Grid2>
+      </Grid>
     </Box>
   );
 }

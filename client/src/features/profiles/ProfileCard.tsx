@@ -28,7 +28,7 @@ export default function ProfileCard({ profile }: Props) {
           alt={profile.displayName + "image"}
         />
         <CardContent>
-          <Box display="flex" flexDirection="column" gap={1}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
             <Typography variant="h5">{profile.displayName}</Typography>
             {profile.bio && (
               <Typography

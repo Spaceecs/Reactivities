@@ -45,11 +45,13 @@ export default function EditProfile({ setEditMode }: Props) {
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      display="flex"
-      flexDirection="column"
-      alignContent="center"
-      gap={3}
-      mt={3}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center",
+        gap: 3,
+        mt: 3,
+      }}
     >
       <TextInput label="Display Name" name="displayName" control={control} />
       <TextInput

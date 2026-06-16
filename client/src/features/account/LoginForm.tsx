@@ -73,11 +73,13 @@ export default function LoginForm() {
       }}
     >
       <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        gap={3}
-        color="secondary.main"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 3,
+          color: "secondary.main",
+        }}
       >
         <LockOpen fontSize="large" />
         <Typography variant="h4">Sign in</Typography>
@@ -109,8 +111,14 @@ export default function LoginForm() {
         Login with GitHub
       </Button>
       {notVerified ? (
-        <Box display="flex" flexDirection="column" justifyContent="center">
-          <Typography textAlign="center" color="error">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Typography sx={{ textAlign: "center", color: "error" }}>
             Your email has not been verified. You can click the button to
             re-send the verification link.
           </Typography>
@@ -122,7 +130,12 @@ export default function LoginForm() {
           </Button>
         </Box>
       ) : (
-        <Box display="flex" alignItems="center" justifyContent="center" gap={3}>
+        <Box sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 3,
+        }}>
           <Typography>
             Forgot password? Click <Link to="/forgot-password">here</Link>{" "}
           </Typography>

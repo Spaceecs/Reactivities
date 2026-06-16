@@ -49,11 +49,13 @@ export default function AccountFormWrapper<TFormData extends FieldValues>({
         }}
       >
         <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          gap={3}
-          color="secondary.main"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 3,
+            color: "secondary.main",
+          }}
         >
           {icon}
           <Typography variant="h4">{title}</Typography>

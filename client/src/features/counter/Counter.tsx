@@ -13,7 +13,7 @@ import { observer } from "mobx-react-lite";
 const Counter = observer(function Counter() {
   const { counterStore } = useStore();
   return (
-    <Box display="flex" justifyContent="space-between">
+    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
       <Box sx={{ width: "60%" }}>
         <Typography variant="h4" gutterBottom>
           {counterStore.title}

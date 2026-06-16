@@ -6,6 +6,7 @@ import {
   Container,
   Typography,
   CircularProgress,
+  MenuList, // 1. Імпортуємо MenuList
 } from "@mui/material";
 import MenuItemLink from "../shared/components/MenuItemLink";
 import { useStore } from "../../lib/hooks/useStore";
@@ -16,6 +17,7 @@ import UserMenu from "./UserMenu";
 export default function NavBar() {
   const { uiStore } = useStore();
   const { currentUser } = useAccount();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -27,13 +29,12 @@ export default function NavBar() {
       >
         <Container maxWidth="lg">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Box>
+            <MenuList sx={{ display: "flex", p: 0 }}>
               <MenuItemLink to={"/"}>
-                <Group fontSize="large" />
+                <Group fontSize="large" sx={{ mr: 1 }} />
                 <Typography
-                  sx={{ position: "relative" }}
+                  sx={{ position: "relative", fontWeight: "bold" }}
                   variant="h4"
-                  fontWeight="bold"
                 >
                   Reactivities
                 </Typography>
@@ -54,20 +55,22 @@ export default function NavBar() {
                   }
                 </Observer>
               </MenuItemLink>
-            </Box>
-            <Box sx={{ display: "flex" }}>
+            </MenuList>
+
+            <MenuList sx={{ display: "flex", p: 0 }}>
               <MenuItemLink to={"/activities"}>Activities</MenuItemLink>
               <MenuItemLink to="/counter">Counter</MenuItemLink>
               <MenuItemLink to="/errors">Errors</MenuItemLink>
-            </Box>
-            <Box display="flex" alignItems="center">
+            </MenuList>
+
+            <Box sx={{ display: "flex", alignItems: "center" }}>
               {currentUser ? (
                 <UserMenu />
               ) : (
-                <>
+                <MenuList sx={{ display: "flex", p: 0 }}>
                   <MenuItemLink to="/login">Login</MenuItemLink>
                   <MenuItemLink to="/register">Register</MenuItemLink>
-                </>
+                </MenuList>
               )}
             </Box>
           </Toolbar>

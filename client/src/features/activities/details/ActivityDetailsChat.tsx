@@ -86,8 +86,8 @@ const ActivityDetailsChat = observer(function ActivityDetailsChat() {
                   alt={"user image"}
                   sx={{ mr: 2 }}
                 />
-                <Box display="flex" flexDirection="column">
-                  <Box display="flex" alignItems="center" gap={3}>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
                     <Typography
                       component={Link}
                       to={`/profiles/${comment.userId}`}

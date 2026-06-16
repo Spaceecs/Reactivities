@@ -1,4 +1,4 @@
-import { Delete, DeleteOutline } from "@mui/icons-material";
+import { Delete, DeleteOutlined } from "@mui/icons-material";
 import { Box, Button } from "@mui/material";
 
 export default function DeleteButton() {
@@ -12,7 +12,7 @@ export default function DeleteButton() {
           cursor: "pointer",
         }}
       >
-        <DeleteOutline
+        <DeleteOutlined
           sx={{ fontSize: 32, color: "white", position: "absolute" }}
         />
         <Delete sx={{ fontSize: 28, color: "red" }} />
